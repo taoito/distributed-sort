@@ -78,11 +78,11 @@ public class ComputeNode implements Runnable {
 
 	public void run() {
 		try {
-		BufferedReader in =
-			new BufferedReader(new InputStreamReader(connection.getInputStream()));
-		DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-		String received = in.readLine();
-		considerMessage(received,out);
+		    BufferedReader in =
+			    new BufferedReader(new InputStreamReader(connection.getInputStream()));
+		    DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+		    String received = in.readLine();
+		    considerMessage(received,out);
 
 		} catch (Exception e) {
 			System.out.println("Thread cannot serve connection: " + e);
@@ -285,17 +285,17 @@ public class ComputeNode implements Runnable {
 		runningTimeMerge = (endMerge - startMerge) / 10000000000.0;
 
 		try {
-		Socket sendingSocket = new Socket(serverIP,serverPort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		    Socket sendingSocket = new Socket(serverIP,serverPort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromServer = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("result/" + finalList + "/" + runningTimeMerge + "\n");
+		    out.writeBytes("result/" + finalList + "/" + runningTimeMerge + "\n");
 
-		String response = inFromServer.readLine();
-		System.out.println(response);
-		out.close();
-		inFromServer.close();
-		sendingSocket.close(); 
+		    String response = inFromServer.readLine();
+		    System.out.println(response);
+		    out.close();
+		    inFromServer.close();
+		    sendingSocket.close(); 
 		} catch (Exception e) {
 			System.out.println("Cannot connect to the Server");
 			System.exit(0);
@@ -373,19 +373,19 @@ public class ComputeNode implements Runnable {
 	public static String notifyServer() {
 		String mergeNode = "";
 		try {
-		Socket sendingSocket = new Socket(serverIP,serverPort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		    Socket sendingSocket = new Socket(serverIP,serverPort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromServer = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("imFinished/" + myInfo + "\n");
+		    out.writeBytes("imFinished/" + myInfo + "\n");
 
-		String response = inFromServer.readLine();
-		String[] tokens = response.split("/");
-		mergeNode = tokens[0];
-		numTasks = Integer.parseInt(tokens[1]);
-		out.close();
-		inFromServer.close();
-		sendingSocket.close(); 
+		    String response = inFromServer.readLine();
+		    String[] tokens = response.split("/");
+		    mergeNode = tokens[0];
+		    numTasks = Integer.parseInt(tokens[1]);
+		    out.close();
+		    inFromServer.close();
+		    sendingSocket.close(); 
 		} catch (Exception e) {
 			System.out.println("Cannot connect to the Server");
 			System.exit(0);
@@ -396,17 +396,17 @@ public class ComputeNode implements Runnable {
 	// Send my sorted result to the Merger Node to combine then merge
 	public static void sendMyResult(String nodeIP, int nodePort, String result) {
 		try {
-		Socket sendingSocket = new Socket(nodeIP,nodePort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		    Socket sendingSocket = new Socket(nodeIP,nodePort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("combine/" + result + "\n");
+		    out.writeBytes("combine/" + result + "\n");
 
-		String response = inFromNode.readLine();
-		System.out.println(response);
-		out.close();
-		inFromNode.close();
-		sendingSocket.close(); 
+		    String response = inFromNode.readLine();
+		    System.out.println(response);
+		    out.close();
+		    inFromNode.close();
+		    sendingSocket.close(); 
 		} catch (Exception e) {
 			System.out.println("Cannot connect to the Node");
 			System.exit(0);
@@ -416,17 +416,17 @@ public class ComputeNode implements Runnable {
 	// Migrate, Send Full Result to another Node to merge 
 	public static void sendFullResult(String nodeIP, int nodePort, String result) {
 		try {
-		Socket sendingSocket = new Socket(nodeIP,nodePort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		    Socket sendingSocket = new Socket(nodeIP,nodePort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("merge/" + result + "\n");
+		    out.writeBytes("merge/" + result + "\n");
 
-		String response = inFromNode.readLine();
-		System.out.println(response);
-		out.close();
-		inFromNode.close();
-		sendingSocket.close(); 
+		    String response = inFromNode.readLine();
+		    System.out.println(response);
+		    out.close();
+		    inFromNode.close();
+		    sendingSocket.close(); 
 		} catch (Exception e) {
 			System.out.println("Cannot connect to the Node");
 			System.exit(0);
@@ -436,17 +436,17 @@ public class ComputeNode implements Runnable {
 	// Migrate, Send Task to another Compute Node to sort
 	public static void sendTask(String nodeIP, int nodePort, String input) {
 		try {
-		Socket sendingSocket = new Socket(nodeIP,nodePort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		    Socket sendingSocket = new Socket(nodeIP,nodePort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("sort/" + allNodeInfo + "/" + input + "\n");
+		    out.writeBytes("sort/" + allNodeInfo + "/" + input + "\n");
 
-		String response = inFromNode.readLine();
-		System.out.println(response);
-		out.close();
-		inFromNode.close();
-		sendingSocket.close(); 
+		    String response = inFromNode.readLine();
+		    System.out.println(response);
+		    out.close();
+		    inFromNode.close();
+		    sendingSocket.close(); 
 		} catch (Exception e) {
 			System.out.println("Cannot connect to the Node");
 			System.exit(0);
@@ -483,16 +483,16 @@ public class ComputeNode implements Runnable {
 	public static String getNodeStatus(String nodeIP, int nodePort) {
 		String nodeStatus = "";
 		try {
-		Socket sendingSocket = new Socket(nodeIP,nodePort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		    Socket sendingSocket = new Socket(nodeIP,nodePort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("check\n");
+		    out.writeBytes("check\n");
 
-		nodeStatus = inFromNode.readLine();
-		out.close();
-		inFromNode.close();
-		sendingSocket.close(); 
+		    nodeStatus = inFromNode.readLine();
+		    out.close();
+		    inFromNode.close();
+		    sendingSocket.close(); 
 		} catch (Exception e) {
 			System.out.println("Cannot connect to the Node");
 			System.exit(0);
@@ -503,17 +503,17 @@ public class ComputeNode implements Runnable {
 	// Contact Server to join the Compute Node lists
 	public static void contactServer() {
 		try {
-		Socket sendingSocket = new Socket(serverIP,serverPort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		    Socket sendingSocket = new Socket(serverIP,serverPort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromServer = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("imComputeNode/" + myInfo + "\n");
+		    out.writeBytes("imComputeNode/" + myInfo + "\n");
 
-		String result = inFromServer.readLine();
-		System.out.println("Server Response: " + result);
-		out.close();
-		inFromServer.close();
-		sendingSocket.close(); 
+		    String result = inFromServer.readLine();
+		    System.out.println("Server Response: " + result);
+		    out.close();
+		    inFromServer.close();
+		    sendingSocket.close(); 
 		} catch (Exception e) {
 			System.out.println("Cannot connect to the Server");
 			System.exit(0);
@@ -588,6 +588,6 @@ public class ComputeNode implements Runnable {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return loadStat ;
+		return loadStat;
 	}
 }

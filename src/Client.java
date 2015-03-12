@@ -32,22 +32,22 @@ public class Client {
 		String jobs = readFile(fileName);
 
 		try{
-		Socket sendingSocket = new Socket(serverIP,serverPort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		    Socket sendingSocket = new Socket(serverIP,serverPort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromServer = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("sort/" + jobs + "\n");
-		System.out.println("Running jobs on Compute Nodes ...");
-		String result = inFromServer.readLine();
-		String[] tokens = result.split("/");
-		System.out.println("Done! Results: ");
-		System.out.println(tokens[0]);
-		System.out.println("Total Running Time : " + tokens[1] + " sec");
-		System.out.println("Total Sorting Time : " + tokens[2] + " sec");
-		System.out.println("Total Merging Time : " + tokens[3] + " sec");
-		out.close();
-		inFromServer.close();
-		sendingSocket.close(); 
+		    out.writeBytes("sort/" + jobs + "\n");
+		    System.out.println("Running jobs on Compute Nodes ...");
+		    String result = inFromServer.readLine();
+		    String[] tokens = result.split("/");
+		    System.out.println("Done! Results: ");
+		    System.out.println(tokens[0]);
+		    System.out.println("Total Running Time : " + tokens[1] + " sec");
+		    System.out.println("Total Sorting Time : " + tokens[2] + " sec");
+		    System.out.println("Total Merging Time : " + tokens[3] + " sec");
+		    out.close();
+		    inFromServer.close();
+		    sendingSocket.close(); 
 		} catch (Exception e) {
 			System.out.println("Cannot connect to the Server");
 		}
@@ -58,16 +58,16 @@ public class Client {
 		String result = "";
 
 		try{
-		Socket sendingSocket = new Socket(serverIP,serverPort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		    Socket sendingSocket = new Socket(serverIP,serverPort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromServer = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("getStat\n");
-		result = inFromServer.readLine();
+		    out.writeBytes("getStat\n");
+		    result = inFromServer.readLine();
 
-		out.close();
-		inFromServer.close();
-		sendingSocket.close(); 
+		    out.close();
+		    inFromServer.close();
+		    sendingSocket.close(); 
 		} catch (Exception e) {
 			System.out.println("Cannot connect to the Server");
 		}

@@ -62,11 +62,11 @@ public class Server implements Runnable {
 
 	public void run() {
 		try {
-		BufferedReader inFromClient =
-			new BufferedReader(new InputStreamReader(connection.getInputStream()));
-		DataOutputStream out = new DataOutputStream(connection.getOutputStream());
-		String received = inFromClient.readLine();
-		considerMessage(received,out);
+		    BufferedReader inFromClient =
+			    new BufferedReader(new InputStreamReader(connection.getInputStream()));
+		    DataOutputStream out = new DataOutputStream(connection.getOutputStream());
+		    String received = inFromClient.readLine();
+		    considerMessage(received,out);
 
 		} catch (Exception e) {
 			System.out.println("Thread cannot serve connection");
@@ -190,23 +190,23 @@ public class Server implements Runnable {
 
 		String message = allNodeInfo + "/" + task;
 
-		try{
-		Socket sendingSocket = new Socket(nodeIP,nodePort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		try {
+		    Socket sendingSocket = new Socket(nodeIP,nodePort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("sort/" + message + "\n");
-		System.out.println("Sent jobs to Compute Node ID: " + nodePort); 
+		    out.writeBytes("sort/" + message + "\n");
+		    System.out.println("Sent jobs to Compute Node ID: " + nodePort); 
 
-		String response = inFromNode.readLine();
-		System.out.println(response);
+		    String response = inFromNode.readLine();
+		    System.out.println(response);
 
-		out.close();
-		inFromNode.close();
-		sendingSocket.close(); 
-		} catch (Exception e) {
-			System.out.println("Cannot connect to the Node ID " + nodePort);
-		}
+	    	out.close();
+	    	inFromNode.close();
+	    	sendingSocket.close(); 
+		    } catch (Exception e) {
+		    	System.out.println("Cannot connect to the Node ID " + nodePort);
+		    }
 	}
 
 	// Track all Assigned Nodes by Heartbeat Messages, receive its current Status
@@ -300,18 +300,18 @@ public class Server implements Runnable {
 		String response = "";
 
 		try{
-		Socket sendingSocket = new Socket(nodeIP,nodePort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		    Socket sendingSocket = new Socket(nodeIP,nodePort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("heartbeat\n");
-		System.out.println("Heartbeat, Tracking Compute Node ID: " + nodePort); 
+		    out.writeBytes("heartbeat\n");
+		    System.out.println("Heartbeat, Tracking Compute Node ID: " + nodePort); 
 
-		response = inFromNode.readLine();
-		System.out.println("  status: " + response);
-		out.close();
-		inFromNode.close();
-		sendingSocket.close(); 
+		    response = inFromNode.readLine();
+		    System.out.println("  status: " + response);
+		    out.close();
+		    inFromNode.close();
+		    sendingSocket.close(); 
 		} catch (Exception e) {
 			System.out.println("Cannot connect to the Compute Node ID " + nodePort);
 		}
@@ -323,18 +323,18 @@ public class Server implements Runnable {
 		String response = "";
 
 		try{
-		Socket sendingSocket = new Socket(nodeIP,nodePort);
-		DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
-		BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
+		    Socket sendingSocket = new Socket(nodeIP,nodePort);
+		    DataOutputStream out = new DataOutputStream(sendingSocket.getOutputStream());
+		    BufferedReader inFromNode = new BufferedReader(new InputStreamReader(sendingSocket.getInputStream()));
 
-		out.writeBytes("find\n");
-		System.out.println("Finding availability status of Compute Node ID: " + nodePort); 
+		    out.writeBytes("find\n");
+		    System.out.println("Finding availability status of Compute Node ID: " + nodePort); 
 
-		response = inFromNode.readLine();
-		System.out.println("  status: " + response);
-		out.close();
-		inFromNode.close();
-		sendingSocket.close(); 
+		    response = inFromNode.readLine();
+		    System.out.println("  status: " + response);
+		    out.close();
+		    inFromNode.close();
+		    sendingSocket.close(); 
 		} catch (Exception e) {
 			System.out.println("Cannot connect to the Compute Node ID " + nodePort);
 		}
