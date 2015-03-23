@@ -39,16 +39,20 @@ Client, Server, and ComputeNode
   Run all three components Client, FileServer and Collector on different machines. The only restriction is that ComputeNode run with different listening ports each, since we use it as their ID. Client and ComputeNodes also must know the Server's machine IP address and its Listening Port. 
 
   A sample testing environment on multiple machines:
+
+  1. Compilation:
+
+        ./compile.sh
 	
-  1. Server:
+  2. Server:
 	
         java -cp bin Server [its Listening Port] 
 
-  2. Client:
+  3. Client:
 		
         java -cp bin Client [Server IP] [Server Port] 
 
-  3. ComputeNodes on 10 different machines:
+  4. ComputeNodes on 10 different machines:
 
         java -cp bin ComputeNode [Server IP] [Server Port] [its Listening Port]
 	
